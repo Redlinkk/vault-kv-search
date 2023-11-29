@@ -36,7 +36,8 @@ func (vc *vaultClient) getKvVersion(path string) (int, error) {
 	mounts, err := vc.sys.ListMounts()
 	if err != nil {
 		fmt.Println(fmt.Errorf("error while getting mounts: %w", err))
-		os.Exit(1)
+		fmt.Println("Assuming store exists and is version 2. Continuing...")
+		return 2, nil
 	}
 
 	secret := strings.Split(path, "/")[0]
